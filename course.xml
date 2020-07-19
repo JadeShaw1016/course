@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="course" default="all">
+  
+  
+  <property file="course.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+    <include name="*.klib"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.11.0/jackson-annotations-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.11.0/jackson-databind-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.0/jackson-datatype-jdk8-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.0/jackson-datatype-jsr310-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.0/jackson-module-parameter-names-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.jayway.jsonpath:json-path:2.4.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.zaxxer:hikaricp:3.4.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_jakarta.activation:jakarta.activation-api:1.2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/jakarta/activation/jakarta.activation-api/1.2.2/jakarta.activation-api-1.2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_jakarta.annotation:jakarta.annotation-api:1.3.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_jakarta.xml.bind:jakarta.xml.bind-api:2.3.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/jakarta/xml/bind/jakarta.xml.bind-api/2.3.3/jakarta.xml.bind-api-2.3.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_mysql:mysql-connector-java:8.0.20.classpath">
+    <pathelement location="${path.variable.maven_repository}/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy-agent:1.10.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy-agent/1.10.10/byte-buddy-agent-1.10.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy:1.10.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy/1.10.10/byte-buddy-1.10.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:accessors-smart:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:json-smart:2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/json-smart/2.3/json-smart-2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-api:2.13.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.13.2/log4j-api-2.13.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.13.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-to-slf4j/2.13.2/log4j-to-slf4j-2.13.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:9.0.35.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-core/9.0.35/tomcat-embed-core-9.0.35.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:9.0.35.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.35/tomcat-embed-websocket-9.0.35.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apiguardian:apiguardian-api:1.1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.assertj:assertj-core:3.16.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/assertj/assertj-core/3.16.1/assertj-core-3.16.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.attoparser:attoparser:2.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.glassfish:jakarta.el:3.0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/glassfish/jakarta.el/3.0.3/jakarta.el-3.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest:2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.jupiter:junit-jupiter-api:5.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.jupiter:junit-jupiter-engine:5.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.jupiter:junit-jupiter-params:5.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.jupiter:junit-jupiter:5.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.6.2/junit-jupiter-5.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.platform:junit-platform-commons:1.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.junit.platform:junit-platform-engine:1.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mockito:mockito-core:3.3.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mockito/mockito-core/3.3.3/mockito-core-3.3.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mockito:mockito-junit-jupiter:3.3.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mockito/mockito-junit-jupiter/3.3.3/mockito-junit-jupiter-3.3.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mybatis.spring.boot:mybatis-spring-boot-autoconfigure:2.1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.1.2/mybatis-spring-boot-autoconfigure-2.1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mybatis/spring/boot/mybatis-spring-boot-starter/2.1.2/mybatis-spring-boot-starter-2.1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mybatis:mybatis-spring:2.0.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mybatis/mybatis-spring/2.0.4/mybatis-spring-2.0.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mybatis:mybatis:3.5.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mybatis/mybatis/3.5.4/mybatis-3.5.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.objenesis:objenesis:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/objenesis/objenesis/2.6/objenesis-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.opentest4j:opentest4j:1.2.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:5.0.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.projectlombok:lombok:1.16.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/projectlombok/lombok/1.16.10/lombok-1.16.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.skyscreamer:jsonassert:1.5.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:jul-to-slf4j:1.7.30.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.7.30.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-autoconfigure/2.3.0.RELEASE/spring-boot-autoconfigure-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-jdbc/2.3.0.RELEASE/spring-boot-starter-jdbc-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-json:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-json/2.3.0.RELEASE/spring-boot-starter-json-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-logging/2.3.0.RELEASE/spring-boot-starter-logging-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-test:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-test/2.3.0.RELEASE/spring-boot-starter-test-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-thymeleaf:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-thymeleaf/2.3.0.RELEASE/spring-boot-starter-thymeleaf-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-tomcat/2.3.0.RELEASE/spring-boot-starter-tomcat-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-web:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-web/2.3.0.RELEASE/spring-boot-starter-web-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter/2.3.0.RELEASE/spring-boot-starter-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test-autoconfigure/2.3.0.RELEASE/spring-boot-test-autoconfigure-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test/2.3.0.RELEASE/spring-boot-test-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot:2.3.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot/2.3.0.RELEASE/spring-boot-2.3.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-aop:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-aop/5.2.6.RELEASE/spring-aop-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-beans:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-beans/5.2.6.RELEASE/spring-beans-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-context:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-context/5.2.6.RELEASE/spring-context-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-core:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-core/5.2.6.RELEASE/spring-core-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-expression:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-expression/5.2.6.RELEASE/spring-expression-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jcl:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jcl/5.2.6.RELEASE/spring-jcl-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jdbc:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jdbc/5.2.6.RELEASE/spring-jdbc-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-test:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-test/5.2.6.RELEASE/spring-test-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-tx:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-tx/5.2.6.RELEASE/spring-tx-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-web:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-web/5.2.6.RELEASE/spring-web-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-webmvc:5.2.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-webmvc/5.2.6.RELEASE/spring-webmvc-5.2.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.4.RELEASE/thymeleaf-extras-java8time-3.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf:thymeleaf-spring5:3.0.11.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/thymeleaf-spring5/3.0.11.RELEASE/thymeleaf-spring5-3.0.11.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf:thymeleaf:3.0.11.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.unbescape:unbescape:1.1.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.xmlunit:xmlunit-core:2.7.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/xmlunit/xmlunit-core/2.7.0/xmlunit-core-2.7.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.yaml:snakeyaml:1.26.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/yaml/snakeyaml/1.26/snakeyaml-1.26.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_course.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.course, clean.artifact.course:war_exploded" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.course" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.course:war" value="${basedir}/target"/>
+    <property name="artifact.output.course:war_exploded" value="${basedir}/target/course-0.0.1-SNAPSHOT"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.course-0.0.1-SNAPSHOT.war" value="${artifacts.temp.dir}/course-0.0.1-SNAPSHOT.war"/>
+  </target>
+  
+  <target name="clean.artifact.course:war_exploded" description="clean course:war exploded artifact output">
+    <delete dir="${artifact.output.course:war_exploded}"/>
+  </target>
+  
+  <target name="artifact.course:war" depends="init.artifacts, artifact.course:war_exploded" description="Build &#39;course:war&#39; artifact">
+    <property name="artifact.temp.output.course:war" value="${artifacts.temp.dir}/course_war"/>
+    <mkdir dir="${artifact.temp.output.course:war}"/>
+    <zip destfile="${temp.jar.path.course-0.0.1-SNAPSHOT.war}">
+      <zipfileset dir="${artifact.output.course:war_exploded}"/>
+    </zip>
+    <copy file="${temp.jar.path.course-0.0.1-SNAPSHOT.war}" tofile="${artifact.temp.output.course:war}/course-0.0.1-SNAPSHOT.war"/>
+  </target>
+  
+  <target name="artifact.course:war_exploded" depends="init.artifacts, compile.module.course" description="Build &#39;course:war exploded&#39; artifact">
+    <mkdir dir="${artifact.output.course:war_exploded}"/>
+    <mkdir dir="${artifact.output.course:war_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.course:war_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.course:war_exploded}/WEB-INF/classes">
+      <fileset dir="${course.output.dir}"/>
+    </copy>
+    <mkdir dir="${artifact.output.course:war_exploded}/WEB-INF/lib"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-jdbc/2.3.0.RELEASE/spring-boot-starter-jdbc-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-jdbc-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter/2.3.0.RELEASE/spring-boot-starter-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot/2.3.0.RELEASE/spring-boot-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-autoconfigure/2.3.0.RELEASE/spring-boot-autoconfigure-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-autoconfigure-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-logging/2.3.0.RELEASE/spring-boot-starter-logging-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-logging-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/logback-classic-1.2.3.jar"/>
+    <copy file="${path.variable.maven_repository}/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/logback-core-1.2.3.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-to-slf4j/2.13.2/log4j-to-slf4j-2.13.2.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/log4j-to-slf4j-2.13.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.13.2/log4j-api-2.13.2.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/log4j-api-2.13.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jul-to-slf4j-1.7.30.jar"/>
+    <copy file="${path.variable.maven_repository}/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jakarta.annotation-api-1.3.5.jar"/>
+    <copy file="${path.variable.maven_repository}/org/yaml/snakeyaml/1.26/snakeyaml-1.26.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/snakeyaml-1.26.jar"/>
+    <copy file="${path.variable.maven_repository}/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/HikariCP-3.4.5.jar"/>
+    <copy file="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/slf4j-api-1.7.30.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-jdbc/5.2.6.RELEASE/spring-jdbc-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-jdbc-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-beans/5.2.6.RELEASE/spring-beans-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-beans-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-tx/5.2.6.RELEASE/spring-tx-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-tx-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-thymeleaf/2.3.0.RELEASE/spring-boot-starter-thymeleaf-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-thymeleaf-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/thymeleaf/thymeleaf-spring5/3.0.11.RELEASE/thymeleaf-spring5-3.0.11.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/thymeleaf-spring5-3.0.11.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/thymeleaf-3.0.11.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/attoparser-2.0.5.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/unbescape-1.1.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.4.RELEASE/thymeleaf-extras-java8time-3.0.4.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/thymeleaf-extras-java8time-3.0.4.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-web/2.3.0.RELEASE/spring-boot-starter-web-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-web-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-json/2.3.0.RELEASE/spring-boot-starter-json-2.3.0.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-boot-starter-json-2.3.0.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.11.0/jackson-databind-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-databind-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.11.0/jackson-annotations-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-annotations-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-core-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.0/jackson-datatype-jdk8-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-datatype-jdk8-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.0/jackson-datatype-jsr310-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-datatype-jsr310-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.0/jackson-module-parameter-names-2.11.0.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/jackson-module-parameter-names-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-web/5.2.6.RELEASE/spring-web-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-web-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-webmvc/5.2.6.RELEASE/spring-webmvc-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-webmvc-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-aop/5.2.6.RELEASE/spring-aop-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-aop-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-context/5.2.6.RELEASE/spring-context-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-context-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-expression/5.2.6.RELEASE/spring-expression-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-expression-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/mybatis/spring/boot/mybatis-spring-boot-starter/2.1.2/mybatis-spring-boot-starter-2.1.2.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/mybatis-spring-boot-starter-2.1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.1.2/mybatis-spring-boot-autoconfigure-2.1.2.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/mybatis-spring-boot-autoconfigure-2.1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/mybatis/mybatis/3.5.4/mybatis-3.5.4.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/mybatis-3.5.4.jar"/>
+    <copy file="${path.variable.maven_repository}/org/mybatis/mybatis-spring/2.0.4/mybatis-spring-2.0.4.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/mybatis-spring-2.0.4.jar"/>
+    <copy file="${path.variable.maven_repository}/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/mysql-connector-java-8.0.20.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-core/5.2.6.RELEASE/spring-core-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-core-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-jcl/5.2.6.RELEASE/spring-jcl-5.2.6.RELEASE.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/spring-jcl-5.2.6.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/projectlombok/lombok/1.16.10/lombok-1.16.10.jar" tofile="${artifact.output.course:war_exploded}/WEB-INF/lib/lombok-1.16.10.jar"/>
+    <mkdir dir="${artifact.output.course:war_exploded}/META-INF"/>
+    <copy file="${basedir}/target/course-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" tofile="${artifact.output.course:war_exploded}/META-INF/MANIFEST.MF"/>
+    <copy todir="${artifact.output.course:war_exploded}">
+      <fileset dir="${basedir}/src/main/webapp"/>
+    </copy>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.course:war, artifact.course:war_exploded" description="Build all artifacts">
+    <mkdir dir="${artifact.output.course:war}"/>
+    <copy todir="${artifact.output.course:war}">
+      <fileset dir="${artifact.temp.output.course:war}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html data-dpr="1" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>搜索校友</title>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/login-type.css" />
+</head>
+<body>
+
+</svg>
+<div id="login-app">
+    <div class="login-app bottom-filling">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">搜索校友信息</h3>
+            </div>
+
+            <div align="center">
+                <div class="title-line">
+							<span class="tit" style="font-size: 38px;">请填写校友ID
+							</span>
+                </div>
+                <div class="login-box clearfix">
+                    <ul>
+                        <form th:action="@{/course/findById}" method="post">
+                            <div class="item username status-box">
+                                <input type="text" name="userId" value="" placeholder="校友ID" id="reg-Sname" maxlength="16" autocomplete="off" class="">
+                            </div>
+                            </br>
+
+                            <div class="btn-box">
+                                <button type="submit" class="btn btn-primary" style="background-color:#66CCFF" th:text="搜索"></button>
+                                <a href="/course/getAll" class="btn btn-reg">返回主页</a>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/login-script.js"></script>
+
+</body>
+</html>

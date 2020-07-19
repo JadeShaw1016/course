@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+spring:
+  messages:
+    basename: i18n.login
+  thymeleaf:
+    servlet.content-type: text/html
+    prefix=classpath: /templates/
+    suffix: .html
+    enabled: true
+    encoding: UTF-8
+    check-template-location: true
+    cache: false
+    mode: LEGACYHTML5
+  mvc:
+    format:
+      date: yyyy-mm-dd
+
+  servlet:
+    multipart.max-file-size: 30MB
+    multipart.max-request-size: 30MB
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.17.0.2:3306/alumni_system?serverTimezone=UTC
+    username: root
+    password: 123456
+    druid:
+      #初始化时建立物理连接的个数
+      initial-size: 3
+      #  最小连接池数量
+      min-idle: 1
+      #最大连接池数量
+      max-active: 5
+      #获取连接时最大等待时间
+      max-wait: 60000
+      #配置监控页面访问登录名及密码
+      stat-view-servlet:
+        login-username: admin
+        login-password: 123456
+      filter:
+        stat:
+          #是否开启慢sql查询监控
+          log-slow-sql: true
+          #慢SQL执行时间
+          slow-sql-millis: 100
+      validation-query: select 1
+
+mybatis:
+  type-aliases-package: com.example.course.Entity
+  mapper-locations: classpath:xml/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+  # 静态文件请求匹配方式
+  spring.mvc.static-path-pattern: /**
+  # 修改默认的静态寻址资源目录
+  spring.resources.static-locations: classpath:/templates/
+  #热部署生效
+  spring.devtools.restart.enabled: true

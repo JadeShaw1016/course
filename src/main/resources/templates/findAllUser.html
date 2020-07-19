@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <title>查看用户信息</title>
+    <style>
+        li{ list-style: none}
+    </style>
+</head>
+<body>
+<br/>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+            <div >
+                <a href="/course/getUser" style="color: white">主页</a>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <a href="/course/getAll" style="color: white">查看所有校友</a>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <a href="/course/addUser" style="color: white">新增校友</a>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <a href="/course/find" style="color: white">搜索校友</a>
+            </div>
+    </div>
+
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(userinfo)}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">用户信息
+<!--                    <input type="text" id="input1" />-->
+<!--                    <input type="button" onclick="javascript:alert(document.getElementById('user_id').value);" value="点我" />-->
+                </h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" >
+                        <table border = "0.5" id = "table_page">
+                            <tr style="background-color: #9fcdff" >
+                                <td align="center" width="50" th:text="校友ID"></td>
+                                <td align="center" width="50" th:text="姓名"></td>
+                                <td align="center" width="50" th:text="性别"></td>
+                                <td align="center" width="100" th:text="生日"></td>
+                                <td align="center" width="60" th:text="毕业年份"></td>
+                                <td align="center" width="50" th:text="工作地"></td>
+                                <td align="center" width="100" th:text="电话"></td>
+                                <td align="center" width="100" th:text="邮箱"></td>
+                                <td align="center" width="50" th:text="微信"></td>
+                                <td align="center" width="50" th:text="操作"></td>
+                                <td align="center" width="50" th:text="操作"></td>
+                            </tr>
+                            <tr th:each="item : ${userinfo}">
+                                <td align="center" th:text="${item.getId()}"></td>
+                                <td align="center" th:text="${item .getName()}"></td>
+                                <td align="center" th:text="${item .getSex()}"></td>
+                                <td align="center" th:text="${item .getBirthday()}"></td>
+                                <td align="center" th:text="${item .getGraduationyear()}"></td>
+                                <td align="center" th:text="${item .getPost()}"></td>
+                                <td align="center" th:text="${item .getCellphone()}"></td>
+                                <td align="center" th:text="${item .getEmail()}"></td>
+                                <td align="center" th:text="${item .getWx()}"></td>
+                                <td align="center">
+                                <button th:attr="del_uri=@{/course/updateUser},id=${item.id}" class="btn_modify">
+                                        修改</button>
+                                </td>
+                                <td align="center">
+                                <button th:attr="del_uri=@{/course/deleteUser},id=${item.id}" class="btn_delete">
+                                        删除</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <form id="updateEmpForm"  method="post" action="/course/updateUser">
+                            <input type="hidden" name="_method" value="update"/>
+                            <input type="hidden" class="idToUpdate" name="id" value="_test"/>
+                        </form>
+                        <form id="deleteEmpForm"  method="post" action="/course/deleteUser">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input type="hidden" class="idToDelete" name="id" value="_test"/>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script th:inline="javascript">
+    var userId = $("#user_id").val();
+    $(function(){
+        $(".btn_modify").click(function(){
+            //修改当前用户
+            if(confirm("确定要修改吗？"))
+            {
+                $(".idToUpdate").val($(this).attr("id"));
+                $("#updateEmpForm").submit();
+            }
+            return false;
+        });
+    });
+    $(function(){
+        $(".btn_delete").click(function(){
+            //删除当前用户
+            if(confirm("确定要删除吗？"))
+            {
+                $(".idToDelete").val($(this).attr("id"));
+                $("#deleteEmpForm").submit();
+                alert("删除成功！");
+            }
+            return false;
+        });
+    });
+
+</script>
+<script>
+    function sure()
+    {
+        return confirm("确定要继续吗？");
+    }
+</script>
+</body>
+</body>
+</html>
